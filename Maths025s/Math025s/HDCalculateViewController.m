@@ -30,10 +30,7 @@
     
     self.title = @"CALCULATE";
 //    self.navigationItem.hidesBackButton = YES;
-    self.calculation.text = [self calculateString];
-//    self.numberOne.text = [NSString stringWithFormat:@"%ld", (long)[[HDRamdomCalculate sharedInstance] randomNumberA]];
-//    self.numberTwo.text = [NSString stringWithFormat:@"%ld", (long)[[HDRamdomCalculate sharedInstance] randomNumberB]];
-
+    [self checkSmallerWithSubaction];
 
     
 }
@@ -42,21 +39,26 @@
 {
     [[HDRamdomCalculate sharedInstance] calculateRandom];
     
-//    NSInteger numberA = [[HDRamdomCalculate sharedInstance] randomNumberA];
-//    NSInteger numberB = [[HDRamdomCalculate sharedInstance] randomNumberB];
-//    
-//    if (numberA > numberB) {
-//        
-//        self.numberOne.text = [NSString stringWithFormat:@"%ld", (long)numberA];
-//        self.numberTwo.text = [NSString stringWithFormat:@"%ld", (long)numberB];
-//        [super viewDidLoad];
-//        
-//    }
 }
 
 - (NSString *)calculateString
 {
     return [[HDRamdomCalculate sharedInstance] stringCalculateByRandomCalculate];
+}
+
+- (void)checkSmallerWithSubaction
+{
+    NSInteger numberA = [[HDRamdomCalculate sharedInstance] randomNumberA];
+    NSInteger numberB = [[HDRamdomCalculate sharedInstance] randomNumberB];
+    if ([[self calculateString] isEqualToString:@"-"]) {
+        
+        if (numberA < numberB) {
+            [[HDRamdomCalculate sharedInstance] calculateRandomRemoveSubaction];
+        }
+    }
+    self.numberOne.text = [NSString stringWithFormat:@"%ld", (long)numberA];
+    self.numberTwo.text = [NSString stringWithFormat:@"%ld", (long)numberB];
+    self.calculation.text = [self calculateString];
 }
 
 - (void)didReceiveMemoryWarning {

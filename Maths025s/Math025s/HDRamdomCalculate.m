@@ -70,6 +70,20 @@ NSString *const HDUseDefaultCalculate = @"HDUseDefaultCalculate";
     [userDefault setObject:calculateString forKey:HDUseDefaultCalculate];
     [userDefault synchronize];
 }
+- (void)calculateRandomRemoveSubaction
+{
+    NSArray *arrayCalculate = [NSArray arrayWithObjects:
+                               @"+",
+                               @"*",
+                               nil];
+    uint32_t randomCalculate = arc4random_uniform((int)[arrayCalculate count]);
+    
+    NSString *calculateString = [NSString stringWithFormat:@"%@", [arrayCalculate objectAtIndex:randomCalculate]];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:calculateString forKey:HDUseDefaultCalculate];
+    [userDefault synchronize];
+}
 
 - (NSString *)stringCalculateByRandomCalculate
 {

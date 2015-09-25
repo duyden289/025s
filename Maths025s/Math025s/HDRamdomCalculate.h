@@ -15,4 +15,5 @@
 - (NSInteger)randomNumberB;
 - (void)calculateRandom;
 - (NSString *)stringCalculateByRandomCalculate;
+- (void)calculateRandomRemoveSubaction;
 @end

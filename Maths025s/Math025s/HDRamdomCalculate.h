@@ -11,8 +11,8 @@
 @interface HDRamdomCalculate : NSObject
 
 + (instancetype)sharedInstance;
-- (NSInteger)randomNumberA;
-- (NSInteger)randomNumberB;
+- (NSInteger)randomNumberFirst;
+- (NSInteger)randomNumberSecond;
 - (void)calculateRandom;
 - (NSString *)stringCalculateByRandomCalculate;
 - (void)calculateRandomRemoveSubaction;

@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *calculation;
 @property (weak, nonatomic) IBOutlet UILabel *numberOne;
 @property (weak, nonatomic) IBOutlet UILabel *numberTwo;
+@property (weak, nonatomic) IBOutlet UILabel *resultCalculate;
 
 @end
 
@@ -31,83 +32,73 @@
     self.title = @"CALCULATE";
 //    self.navigationItem.hidesBackButton = YES;
     [self checkSmallerWithSubaction];
+    [self performCalculate];
 
     
 }
 
+/**
+ *  Call function random calculate
+ */
 -(void)randomCalculate
 {
     [[HDRamdomCalculate sharedInstance] calculateRandom];
     
 }
 
+/**
+ *  Get string of random calculate
+ *
+ *  @return string random calculate
+ */
 - (NSString *)calculateString
 {
     return [[HDRamdomCalculate sharedInstance] stringCalculateByRandomCalculate];
 }
 
+/**
+ *  Check with subaction number first have smaller number second
+ */
 - (void)checkSmallerWithSubaction
 {
-    NSInteger numberA = [[HDRamdomCalculate sharedInstance] randomNumberA];
-    NSInteger numberB = [[HDRamdomCalculate sharedInstance] randomNumberB];
+    NSInteger numberFirst = [[HDRamdomCalculate sharedInstance] randomNumberFirst];
+    NSInteger numberSecond = [[HDRamdomCalculate sharedInstance] randomNumberSecond];
     if ([[self calculateString] isEqualToString:@"-"]) {
         
-        if (numberA < numberB) {
+        if (numberFirst < numberSecond) {
+            
             [[HDRamdomCalculate sharedInstance] calculateRandomRemoveSubaction];
         }
     }
-    self.numberOne.text = [NSString stringWithFormat:@"%ld", (long)numberA];
-    self.numberTwo.text = [NSString stringWithFormat:@"%ld", (long)numberB];
+    self.numberOne.text = [NSString stringWithFormat:@"%ld", (long)numberFirst];
+    self.numberTwo.text = [NSString stringWithFormat:@"%ld", (long)numberSecond];
     self.calculation.text = [self calculateString];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (NSUInteger)number:(HDNumber)numberCode
+/**
+ *  Perfomr calculate
+ */
+- (void)performCalculate
 {
-    NSUInteger numberSelect;
+    NSString *stringCalculate = self.calculation.text;
+    NSInteger numberFirst = [self.numberOne.text integerValue];
+    NSInteger numberSecond = [self.numberTwo.text integerValue];
     
-    switch (numberCode) {
-        case HDNumberZero:
-            numberSelect = 0;
-            break;
-        case HDNumberOne:
-            numberSelect = 1;
-            break;
-        case HDNumberTwo:
-            numberSelect = 2;
-            break;
-        case HDNUmberThree:
-            numberSelect = 3;
-            break;
-        case HDNumberFour:
-            numberSelect = 4;
-            break;
-        case HDNumberFive:
-            numberSelect = 5;
-            break;
-        case HDNumberSix:
-            numberSelect = 6;
-            break;
-        case HDNumberSeven:
-            numberSelect = 7;
-            break;
-        case HDNumberEight:
-            numberSelect = 8;
-            break;
-        case HDNumberNine:
-            numberSelect = 9;
-            break;
-        case HDNumberTen:
-            numberSelect = 10;
-            break;
+    if ([stringCalculate isEqualToString:@"*"]) {
         
-        default:
-            break;
+        NSInteger multiplicationCalculate = numberFirst * numberSecond;
+        self.resultCalculate.text = [NSString stringWithFormat:@"%ld", (long)multiplicationCalculate];
     }
-    return numberSelect;
+    else if ([stringCalculate isEqualToString:@"+"])
+    {
+        NSInteger summationCalculate= numberFirst + numberSecond;
+        self.resultCalculate.text = [NSString stringWithFormat:@"%ld", (long)summationCalculate];
+    }
+    else if ([stringCalculate isEqualToString:@"-"])
+    {
+        NSInteger subactionCalculate = numberFirst - numberSecond;
+        self.resultCalculate.text = [NSString stringWithFormat:@"%ld", (long)subactionCalculate];
+    }
 }
 
 - (void)showAlertController : (NSString *)stringNumberCode

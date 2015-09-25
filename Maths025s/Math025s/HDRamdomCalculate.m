@@ -12,6 +12,11 @@ NSString *const HDUseDefaultCalculate = @"HDUseDefaultCalculate";
 
 @implementation HDRamdomCalculate
 
+/**
+ *  Singerton HD RanDomCalculate
+ *
+ *  @return hdRandomCalculate
+ */
 + (instancetype)sharedInstance
 {
     static HDRamdomCalculate *hdRandomCalculate;
@@ -25,36 +30,31 @@ NSString *const HDUseDefaultCalculate = @"HDUseDefaultCalculate";
     return hdRandomCalculate;
 }
 
-- (NSInteger)randomNumberA
+/**
+ *  Random number first
+ *
+ *  @return number value of number first
+ */
+- (NSInteger)randomNumberFirst
 {
     NSInteger numberA = arc4random_uniform(10);
     return numberA;
 }
 
-- (NSInteger)randomNumberB
+/**
+ *  Random number second
+ *
+ *  @return number value of number second
+ */
+- (NSInteger)randomNumberSecond
 {
     NSInteger numberB = arc4random_uniform(10);
     return numberB;
 }
 
-//- (BOOL)checkNumberAAndNumberB
-//{
-//    BOOL result = NO;
-//    
-//    if ([[self stringCalculateByRandomCalculate] isEqualToString:@"-"]) {
-//        
-//        NSInteger numberA = [self randomNumberA];
-//        NSInteger numberB = [self randomNumberB];
-//        if (numberA < numberB) {
-//            
-//            result = YES;
-//        }
-//    }
-//    
-//    return result;
-//}
-
-
+/**
+ *  Random Calculate
+ */
 - (void)calculateRandom
 {
     NSArray *arrayCalculate = [NSArray arrayWithObjects:
@@ -70,6 +70,10 @@ NSString *const HDUseDefaultCalculate = @"HDUseDefaultCalculate";
     [userDefault setObject:calculateString forKey:HDUseDefaultCalculate];
     [userDefault synchronize];
 }
+
+/**
+ *  Random calculate with don't have subaction calculate
+ */
 - (void)calculateRandomRemoveSubaction
 {
     NSArray *arrayCalculate = [NSArray arrayWithObjects:
@@ -85,6 +89,11 @@ NSString *const HDUseDefaultCalculate = @"HDUseDefaultCalculate";
     [userDefault synchronize];
 }
 
+/**
+ *  Save calculate
+ *
+ *  @return string of calculate
+ */
 - (NSString *)stringCalculateByRandomCalculate
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
